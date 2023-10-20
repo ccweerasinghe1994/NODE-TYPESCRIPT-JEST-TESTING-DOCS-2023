@@ -1,11 +1,19 @@
 - [2 - Basics of testing with Jest](#2---basics-of-testing-with-jest)
-  - [4 - Section intro](#4---section-intro)
-  - [5 - Jest introduction](#5---jest-introduction)
-  - [6 - Jest project setup](#6---jest-project-setup)
-  - [7 - Structure of an unit test](#7---structure-of-an-unit-test)
-  - [8 - Jest assertions and matchers](#8---jest-assertions-and-matchers)
-  - [9 - Multiple tests structure](#9---multiple-tests-structure)
-  - [10 - Parametrized tests](#10---parametrized-tests)
+	- [4 - Section intro](#4---section-intro)
+	- [5 - Jest introduction](#5---jest-introduction)
+	- [6 - Jest project setup](#6---jest-project-setup)
+	- [7 - Structure of an unit test](#7---structure-of-an-unit-test)
+	- [8 - Jest assertions and matchers](#8---jest-assertions-and-matchers)
+	- [9 - Multiple tests structure](#9---multiple-tests-structure)
+	- [10 - Parametrized tests](#10---parametrized-tests)
+- [3 - Intermediate testing topics](#3---intermediate-testing-topics)
+	- [11 - Section intro](#11---section-intro)
+	- [12 - FIRST principles](#12---first-principles)
+	- [13 - Jest hooks](#13---jest-hooks)
+	- [14 - Testing for errors](#14---testing-for-errors)
+	- [15 - Jest aliases and watch mode](#15---jest-aliases-and-watch-mode)
+	- [16 - VSCode debug configuration](#16---vscode-debug-configuration)
+	- [17 - Coverage](#17---coverage)
 
 ## 2 - Basics of testing with Jest
 
@@ -309,3 +317,70 @@ output
 - improve maintainability
 - improve test coverage
 - and more
+
+## 3 - Intermediate testing topics
+
+### 11 - Section intro
+![Alt text](image-11.png)
+
+
+### 12 - FIRST principles
+![Alt text](image-12.png)
+
+![Alt text](image-13.png)
+
+![Alt text](image-14.png)
+
+![Alt text](image-15.png)
+
+![Alt text](image-16.png)
+
+![Alt text](image-17.png)
+
+
+
+
+### 13 - Jest hooks
+let's add a new class to test
+
+```ts
+export class StringUtil {
+	public toUpperCase(s:string){
+		return toUpperCase(s);
+	}
+}
+```
+
+let's write a test for it
+
+```ts
+describe.only("StringUtil test suite", () => {
+		let sut: StringUtil|null;
+		beforeEach(()=>{
+			console.log("beforeEach");
+			sut = new StringUtil();
+		});
+		afterEach(()=>{
+			console.log("afterEach");
+			sut = null;
+		});
+
+		it("Should return correct uppercase",()=>{
+
+			const expected = "HELLO";
+			// act
+			const actual = sut && sut.toUpperCase("hello");
+			// assert
+			expect(actual).toBe(expected);
+		})
+	});
+```
+these `hooks` are called `beforeEach` and `afterEach`
+and there context is relative to the place where they are defined.
+
+output
+![Alt text](image-18.png)
+### 14 - Testing for errors
+### 15 - Jest aliases and watch mode
+### 16 - VSCode debug configuration
+### 17 - Coverage
